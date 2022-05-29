@@ -2,6 +2,8 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { useState } from "react";
+
 let schema = yup.object().shape({
   firstName: yup.string().required(),
   lastName: yup.string().required(),
@@ -15,6 +17,7 @@ let schema = yup.object().shape({
 });
 
 function Form() {
+  const [data, setData] = useState({});
   const {
     register,
     handleSubmit,
@@ -23,13 +26,16 @@ function Form() {
   } = useForm({
     resolver: yupResolver(schema),
   });
-  const submitFn = (val) => console.log(val);
+  const submitFn = (val) => {
+    console.log(val);
+    setData(val);
+  };
 
   return (
     <>
       <h1>My React Form</h1>
-      <form onSubmit={handleSubmit(submitFn)}>
-        <div className="myForm">
+      <div className="container">
+        <form className="myForm" onSubmit={handleSubmit(submitFn)}>
           <input
             type="text"
             placeholder="First name"
@@ -48,8 +54,14 @@ function Form() {
           />
           <label htmlFor="lastName">{errors.lastName?.message}</label>
 
-          <input type="text" id="age" placeholder="age" {...register("age")} />
-          <label htmlFor="age">{errors.age?.message}</label>
+          <input
+            type="text"
+            id="age"
+            placeholder="age"
+            name="age"
+            {...register("age")}
+          />
+          <label htmlFor="age">{errors.age && `Age should be a number`}</label>
 
           <input
             type="text"
@@ -80,8 +92,15 @@ function Form() {
           </label>
 
           <button type="submit">Submit form</button>
+        </form>
+
+        <div className="formOutput">
+          <p>First Name: {data.firstName}</p>
+          <p>Last Name: {data.lastName}</p>
+          <p>Age: {data.age}</p>
+          <p>Email address: {data.email}</p>
         </div>
-      </form>
+      </div>
     </>
   );
 }

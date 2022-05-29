@@ -37,15 +37,52 @@
   }
 }
 
+body {
+  background-color: rgb(27, 25, 48);
+  color: white;
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+.container {
+  display: flex;
+  /* justify-content: center; */
+  background-color: rgb(16, 18, 23);
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px 1px grey;
+  padding: 30px;
+  inline-size: 50%;
+  margin: auto;
+  gap: 20px;
+}
+
 .myForm {
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 10px;
   inline-size: 50%;
-  justify-content: center;
-  align-content: center;
+}
+
+.formOutput {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.2rem;
   margin: auto;
-  border: 1px solid;
-  padding: 30px;
+  gap: 5px;
+}
+
+.myForm input,
+button {
+  font-size: 1.1rem;
+  padding: 5px;
+  border-radius: 5px;
+  border: none;
+  inline-size: 100%;
+}
+
+button {
+  background-color: rgb(71, 23, 205);
+  color: white;
 }
